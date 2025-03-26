@@ -1,3 +1,4 @@
+
 /* Global Styles */
 * {
     margin: 0;
@@ -151,25 +152,26 @@ body {
 }
 
 .btn-outline-primary {
-    border-color: var(--primary);
-    color: var(--primary);
+    border-color: #28a745 !important;
+    color: #28a745 !important;
 }
 
 .btn-outline-primary:hover {
-    background-color: var(--primary);
-    border-color: var(--primary);
-    color: white;
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    color: white !important;
 }
 
 .btn-primary {
-    background-color: var(--primary);
-    border-color: var(--primary);
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    color: white !important;
+}
+.btn-primary:hover {
+    background-color: #218838 !important;
+    border-color: #218838 !important;
 }
 
-.btn-primary:hover {
-    background-color: var(--primary-dark);
-    border-color: var(--primary-dark);
-}
 
 /* Hero Section */
 .hero {
@@ -522,5 +524,245 @@ footer {
     .feature-card {
         width: 100%;
         max-width: 350px;
+    }
+}
+/* Existing CSS remains unchanged */
+
+/* Auth Pages (Login & Register) Styling */
+.auth-card {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.auth-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.auth-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+.auth-subtitle {
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.auth-form .form-group {
+    margin-bottom: 20px;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.auth-form label i {
+    color: var(--primary);
+    margin-right: 5px;
+}
+
+.auth-form .form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.auth-form .form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+    outline: none;
+}
+
+.auth-form .password-field {
+    position: relative;
+}
+
+.auth-form .password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 45px;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.3s ease;
+}
+
+.auth-form .password-toggle:hover {
+    color: var(--primary);
+}
+
+.auth-form .form-check-input {
+    cursor: pointer;
+}
+
+.auth-form .form-check-input:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.auth-form .forgot-link {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.auth-form .forgot-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.auth-form .btn-block {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 10px 0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.auth-form .btn-block:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.auth-footer a {
+    color: var(--primary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.auth-footer a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for auth pages */
+@media screen and (max-width: 768px) {
+    .auth-card {
+        padding: 25px;
+        margin: 20px 0;
+    }
+    
+    .auth-title {
+        font-size: 1.7em;
+    }
+}
+/* About Us Page Specific Styles */
+.about-us-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.about-us-content h4 {
+    color: var(--primary);
+    font-size: 2em;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+.about-us-content h4:after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 3px;
+    background: var(--primary);
+    bottom: -10px;
+    left: 0;
+    border-radius: 2px;
+}
+
+.about-us-content h5 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.about-us-content h6 {
+    color: var(--dark);
+    margin-bottom: 15px;
+}
+
+.about-us-content p {
+    line-height: 1.6;
+    color: var(--dark);
+    margin-bottom: 20px;
+}
+
+.about-us-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about-us-content ul li {
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.about-us-content ul li:before {
+    content: '✓';
+    color: var(--primary);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.about-us-contact-info {
+    background-color: var(--light);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.about-us-contact-info p {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.about-us-contact-info i {
+    color: var(--primary);
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .about-us-content {
+        padding: 20px 15px;
+    }
+
+    .about-us-content h4 {
+        font-size: 1.8em;
     }
 }
