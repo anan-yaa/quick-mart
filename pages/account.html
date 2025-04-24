@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../assets/images/icon.png" />
+    <style>
+        .account-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .account-sidebar {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            height: 100%;
+        }
+        .account-content {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .order-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px;
+        }
+        /* New styles for email wrapping */
+        .profile-header-text {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            max-width: 200px; /* Adjust as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+    </div>
+
+    <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="col-md-3 mb-2 mb-md-0">
+                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <div class="logo-wrapper">
+                        <i class="fas fa-shopping-basket"></i>
+                        <span class="logo-text">Quick Mart</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="../index.html" class="nav-link px-2 link-secondary">Home</a></li>
+                <li><a href="shop.html" class="nav-link px-2 link-secondary">Shop</a></li>
+                <li><a href="account.html" class="nav-link px-2 link-secondary">Account</a></li>
+                <li><a href="about-us.html" class="nav-link px-2 link-secondary">About Us</a></li>
+            </ul>
+            
+            <div class="col-md-3 text-end">
+              
+            </div>
+        </header>
+    </div>
+
+    <main class="account-container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="account-sidebar">
+                    <div class="profile-header">
+                        <img src="../assets/images/default.png" alt="Profile" class="profile-avatar">
+                        <div class="profile-header-text">
+                            <h5 id="user-name">Alicia H</h5>
+                            <p id="user-email" class="text-break">alicia@example.com</p>
+                        </div>
+                    </div>
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab">Profile</a>
+                        <a class="nav-link" id="v-pills-orders-tab" data-bs-toggle="pill" href="#v-pills-orders" role="tab">My Orders</a>
+                        <a class="nav-link" id="v-pills-addresses-tab" data-bs-toggle="pill" href="#v-pills-addresses" role="tab">Addresses</a>
+                        <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings" role="tab">Account Settings</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="account-content tab-content" id="v-pills-tabContent">
+                    <!-- Profile Tab -->
+                    <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel">
+                        <h3>My Profile</h3>
+                        <form id="profile-form">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="first-name" value="Alicia" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="last-name" value="H" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" value="alicia@example.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" value="+91 98765 XXXXX">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                        </form>
+                    </div>
+
+                    <!-- Orders Tab -->
+                    <div class="tab-pane fade" id="v-pills-orders" role="tabpanel">
+                        <h3>My Orders</h3>
+                        <div id="orders-container">
+                            <div class="order-card">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h5>Order #1234</h5>
+                                        <p>Placed on: 15 March 2025</p>
+                                    </div>
+                                    <div class="text-end">
+                                        <strong>Total: ₹599.99</strong>
+                                        <p class="text-success">Delivered</p>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <p>Items: Fresh Apples, Milk, Bread</p>
+                                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                </div>
+                            </div>
+                            <div class="order-card">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h5>Order #1235</h5>
+                                        <p>Placed on: 22 March 2025</p>
+                                    </div>
+                                    <div class="text-end">
+                                        <strong>Total: ₹349.50</strong>
+                                        <p class="text-warning">Processing</p>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <p>Items: Chicken Breast, Eggs, Bananas</p>
+                                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Addresses Tab -->
+                    <div class="tab-pane fade" id="v-pills-addresses" role="tabpanel">
+                        <h3>My Addresses</h3>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Home Address</h5>
+                                <p>
+                                    Alicia H<br>
+                                    123 Main Street, Apartment 45<br>
+                                    Mumbai, Maharashtra 400001<br>
+                                    India
+                                </p>
+                                <div class="d-flex justify-content-between">
+                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                    <button class="btn btn-sm btn-outline-danger">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Add New Address</button>
+                    </div>
+
+                    <!-- Account Settings Tab -->
+                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel">
+                        <h3>Account Settings</h3>
+                        <div class="mb-4">
+                            <h5>Change Password</h5>
+                            <form id="password-form">
+                                <div class="mb-3">
+                                    <label class="form-label">Current Password</label>
+                                    <input type="password" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">New Password</label>
+                                    <input type="password" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Confirm New Password</label>
+                                    <input type="password" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Change Password</button>
+                            </form>
+                        </div>
+                        <div>
+                            <h5>Account Preferences</h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="newsletter-opt-in" checked>
+                                <label class="form-check-label" for="newsletter-opt-in">
+                                    Receive newsletter and special offers
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="sms-opt-in">
+                                <label class="form-check-label" for="sms-opt-in">
+                                    Receive SMS notifications about orders
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 QuickMart. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Form submission handlers
+        document.getElementById('profile-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Profile updated successfully!');
+        });
+
+        document.getElementById('password-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Password changed successfully!');
+        });
+
+        // Add event listeners for view order details (just an example)
+        document.querySelectorAll('.order-card .btn-outline-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Order details would be shown here.');
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
