@@ -1,4 +1,4 @@
-# Grocery Store Management System (UI)  
+# QuickMart (UI)  
 
 ##  Project Overview  
 The **Grocery Store Management System UI** is designed to streamline grocery store operations by providing an intuitive interface for **inventory tracking, sales management, supplier coordination, and customer interactions**. This project focuses on building a **responsive and user-friendly frontend** using **HTML, CSS, and JavaScript**, with plans for future backend integration.  
