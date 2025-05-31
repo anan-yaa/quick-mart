@@ -3,13 +3,14 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+
+firebase-config.js
 # User-specific files
 *.rsuser
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
-.firebase-config.js
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
