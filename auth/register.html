@@ -37,12 +37,15 @@
                     <h1 class="auth-title">Create an Account</h1>
                     <p class="auth-subtitle">Join Quick Mart for fresh groceries delivered to your door!</p>
                     
-                    <form class="auth-form">
+                    <form id="register-form" class="auth-form">
                         <div class="form-group">
-                            <label for="username"><i class="fas fa-user"></i> Username</label>
-                            <input type="text" id="username" class="form-control" placeholder="Choose a username" required>
+                            <label for="first-name"><i class="fas fa-user"></i> First Name</label>
+                            <input type="text" id="first-name" class="form-control" placeholder="Enter your first name" required>
                         </div>
-                        
+                        <div class="form-group">
+                            <label for="last-name"><i class="fas fa-user"></i> Last Name</label>
+                            <input type="text" id="last-name" class="form-control" placeholder="Enter your last name" required>
+                        </div>
                         <div class="form-group">
                             <label for="email"><i class="fas fa-envelope"></i> Email</label>
                             <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
@@ -69,7 +72,7 @@
                             <label for="terms" class="form-check-label">I agree to the <a href="#">Terms & Conditions</a></label>
                         </div>
                         
-                        <a href="../pages/shop.html" type="submit" class="btn-primary btn-block" style="text-decoration:none; text-align: center">Create Account</a>
+                        <button type="submit" class="btn-primary btn-block">Create Account</button>
                         
                         <div class="auth-footer">
                             <p>Already have an account? <a href="login.html">Sign In</a></p>
@@ -81,9 +84,68 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Quick Mart Grocery. All rights reserved.</p>
+        <p>&copy; 2025 Quick Mart. All rights reserved.</p>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+   <script type="module">
+        import { signup } from '../assets/javascript/auth.js';
+        
+        // Wait for page to fully load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM loaded, looking for form");
+            
+            const form = document.getElementById('register-form');
+            console.log("Form found:", form); // This will show if form exists
+            
+            if (form) {
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    console.log("Form submitted");
+                    
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    
+                    const result = await signup(email, password);
+                    console.log("Signup result:", result);
+                    
+                    if (result.success) {
+                        window.location.href = '../pages/account.html';
+                    } else {
+                        alert('Signup failed: ' + result.error);
+                    }
+                });
+            } else {
+                console.log("Form not found! Check your form ID");
+            }
+        });
+    </script>
+    //for the password toggle functionality
+
+        <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleIcons = document.querySelectorAll('.password-toggle');
+        
+        toggleIcons.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const passwordField = this.closest('.password-field');
+                // Get the input within that field
+                const input = passwordField.querySelector('input');
+                // Get the icon
+                const icon = this.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                }
+            });
+        });
+    });
+    </script>
 </body>
 </html>
