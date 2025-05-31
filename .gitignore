@@ -4,7 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
 
-firebase-config.js
+assets/javascript/firebase-config.js
 # User-specific files
 *.rsuser
 *.suo
