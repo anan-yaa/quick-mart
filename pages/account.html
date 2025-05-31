@@ -10,6 +10,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../assets/images/icon.png" />
     <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+        }
         .account-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -57,6 +61,7 @@
     </style>
 </head>
 <body>
+
     <div class="background-animation">
         <div class="shape shape1"></div>
         <div class="shape shape2"></div>
@@ -81,7 +86,7 @@
             </ul>
             
             <div class="col-md-3 text-end">
-              
+              <button onclick="logout()" class="btn btn-primary">Logout</button>
             </div>
         </header>
     </div>
@@ -93,8 +98,8 @@
                     <div class="profile-header">
                         <img src="../assets/images/default.png" alt="Profile" class="profile-avatar">
                         <div class="profile-header-text">
-                            <h5 id="user-name">Alicia H</h5>
-                            <p id="user-email" class="text-break">alicia@example.com</p>
+                            <h5 id="user-name"></h5>
+                            <p id="user-email" class="text-break"></p>
                         </div>
                     </div>
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -114,20 +119,20 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="first-name" value="Alicia" required>
+                                    <input type="text" class="form-control" id="first-name" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="last-name" value="H" required>
+                                    <input type="text" class="form-control" id="last-name" required>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="email" value="alicia@example.com" required>
+                                <input type="email" class="form-control" id="email" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Phone Number</label>
-                                <input type="tel" class="form-control" id="phone" value="+91 98765 XXXXX">
+                                <label class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Update Profile</button>
                         </form>
@@ -238,27 +243,80 @@
     <footer>
         <p>&copy; 2025 QuickMart. All Rights Reserved.</p>
     </footer>
-
-    <script>
-        // Form submission handlers
-        document.getElementById('profile-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Profile updated successfully!');
-        });
-
-        document.getElementById('password-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Password changed successfully!');
-        });
-
-        // Add event listeners for view order details (just an example)
-        document.querySelectorAll('.order-card .btn-outline-primary').forEach(button => {
-            button.addEventListener('click', function() {
-                alert('Order details would be shown here.');
-            });
-        });
-    </script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+  <script type="module">
+    import { app } from '../assets/javascript/firebase-config.js';
+    import { getAuth, onAuthStateChanged, updateProfile, updatePassword, signOut } 
+    from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+    const auth = getAuth(app);
+
+    // Profile form submission
+    document.getElementById('profile-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const user = auth.currentUser;
+        if (user) {
+            try {
+                const firstName = document.getElementById('first-name').value;
+                const lastName = document.getElementById('last-name').value;
+                const fullName = `${firstName} ${lastName}`.trim();
+
+                await updateProfile(user, {
+                    displayName: fullName
+                });
+
+                // Update display immediately
+                document.getElementById('user-name').textContent = fullName;
+                alert('Profile updated successfully!');
+            } catch (error) {
+                console.error('Update error:', error);
+                alert('Error updating profile: ' + error.message);
+            }
+        }
+    });
+
+    // Password form submission
+    document.getElementById('password-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const user = auth.currentUser;
+        const newPassword = document.querySelector('#v-pills-settings input[type="password"]').value;
+        
+        if (user) {
+            try {
+                await updatePassword(user, newPassword);
+                alert('Password updated successfully!');
+                document.getElementById('password-form').reset();
+            } catch (error) {
+                alert('Error updating password: ' + error.message);
+            }
+        }
+    });
+
+    // Logout function
+    window.logout = async function() {
+        try {
+            await signOut(auth);
+            window.location.href = '../auth/login.html';
+        } catch (error) {
+            console.error('Error signing out:', error);
+        }
+    }
+
+    // Auth state observer
+    onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            window.location.href = '../auth/login.html';
+        } else {
+            const [firstName, lastName] = (user.displayName || user.email.split('@')[0]).split(' ');
+            
+            document.getElementById('user-name').textContent = user.displayName || user.email.split('@')[0];
+            document.getElementById('user-email').textContent = user.email;
+            document.getElementById('email').value = user.email;
+            document.getElementById('first-name').value = firstName || '';
+            document.getElementById('last-name').value = lastName || '';
+        }
+    });
+</script>
 </body>
 </html>
