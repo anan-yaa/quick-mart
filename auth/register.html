@@ -89,38 +89,50 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
    <script type="module">
-        import { signup } from '../assets/javascript/auth.js';
+    import { signup } from '../assets/javascript/auth.js';
         
-        // Wait for page to fully load
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("DOM loaded, looking for form");
-            
-            const form = document.getElementById('register-form');
-            console.log("Form found:", form); // This will show if form exists
-            
-            if (form) {
-                form.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    console.log("Form submitted");
-                    
-                    const email = document.getElementById('email').value;
-                    const password = document.getElementById('password').value;
-                    
-                    const result = await signup(email, password);
-                    console.log("Signup result:", result);
-                    
-                    if (result.success) {
-                        window.location.href = '../pages/account.html';
-                    } else {
-                        alert('Signup failed: ' + result.error);
-                    }
-                });
-            } else {
-                console.log("Form not found! Check your form ID");
-            }
-        });
-    </script>
-    //for the password toggle functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("DOM loaded, looking for form");
+        
+        const form = document.getElementById('register-form');
+        console.log("Form found:", form);
+        
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                console.log("Form submitted");
+                
+                // Get all form values
+                const firstName = document.getElementById('first-name').value;
+                const lastName = document.getElementById('last-name').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                // Create user data object
+                const userData = {
+                    firstName,
+                    lastName,
+                    email,
+                    displayName: `${firstName} ${lastName}`.trim()
+                };
+                
+                const result = await signup(email, password, userData);
+                console.log("Signup result:", result);
+                
+                if (result.success) {
+                    // Store user data in localStorage
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    window.location.href = '../pages/account.html';
+                } else {
+                    alert('Signup failed: ' + result.error);
+                }
+            });
+        } else {
+            console.log("Form not found! Check your form ID");
+        }
+    });
+</script>
+    // for the password toggle functionality
 
         <script>
     document.addEventListener('DOMContentLoaded', function() {
