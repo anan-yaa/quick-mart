@@ -57,7 +57,7 @@
     <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <div class="col-md-3 mb-2 mb-md-0">
-                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                <a href="../index.html" class="d-inline-flex link-body-emphasis text-decoration-none">
                     <div class="logo-wrapper">
                         <i class="fas fa-shopping-basket"></i>
                         <span class="logo-text">Quick Mart</span>
@@ -67,7 +67,7 @@
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="../index.html" class="nav-link px-2 link-secondary">Home</a></li>
                 <li><a href="shop.html" class="nav-link px-2 link-secondary">Shop</a></li>
-                <li><a href="account.html" class="nav-link px-2 link-secondary">Account</a></li>
+               
                 <li><a href="about-us.html" class="nav-link px-2 link-secondary">About Us</a></li>
             </ul>
             
@@ -91,7 +91,7 @@
             <div id="cart-details">
                 <p>Cart Total: ₹<span id="cart-total">0.00</span></p>
                 <p>Total Items: <span id="cart-item-count">0</span></p>
-                <a href="cart.html" id="checkout-btn" class="btn btn-primary">Proceed to Checkout</a>
+                <button id="checkout-btn" class="btn btn-primary">Proceed to Checkout</button>
             </div>
         </div>
     </main>
@@ -100,6 +100,29 @@
         <p>&copy; 2025 QuickMart. All Rights Reserved.</p>
     </footer>
 
+    <!-- Modal for empty cart -->
+    <div class="modal fade" id="errorModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cart is empty :( </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-shopping-cart fa-3x text-danger mb-3"></i>
+                    <p>Your cart is empty! Please add items before checking out.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Main Script -->
     <script>
         // Product data
         const products = [
@@ -152,7 +175,7 @@
 
         function renderProducts() {
             const container = document.getElementById('product-container');
-            container.innerHTML = ''; // Clear existing products
+            container.innerHTML = '';
 
             products.forEach(product => {
                 const productDiv = document.createElement('div');
@@ -194,8 +217,6 @@
             
             if (quantity > 0) {
                 const product = products.find(p => p.id === productId);
-                
-                // Check if product already in cart
                 const existingCartItem = cart.find(item => item.id === productId);
                 
                 if (existingCartItem) {
@@ -208,7 +229,7 @@
                 }
 
                 updateCartSummary();
-                quantityInput.value = 0; // Reset quantity
+                quantityInput.value = 0;
             }
         }
 
@@ -220,20 +241,18 @@
             document.getElementById('cart-item-count').textContent = cartItemCount;
         }
 
+        // Checkout button event listener
         document.getElementById('checkout-btn').addEventListener('click', () => {
             if (cart.length > 0) {
-                alert('Proceeding to checkout. Total: ₹' + 
-                    cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2));
-                // In a real application, this would redirect to a checkout page
+                window.location.href = 'cart.html';
             } else {
-                alert('Your cart is empty!');
+                const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                errorModal.show();
             }
         });
 
         // Initialize products on page load
         renderProducts();
     </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
