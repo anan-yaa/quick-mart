@@ -131,8 +131,8 @@
                                 <input type="email" class="form-control" id="email" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" required>
+                                <label class="form-label">Date of Birth</label>
+                                <input type="text" class="form-control" id="dob" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Update Profile</button>
                         </form>
@@ -295,26 +295,56 @@
 
     // Logout function
     window.logout = async function() {
-        try {
-            await signOut(auth);
-            window.location.href = '../auth/login.html';
-        } catch (error) {
-            console.error('Error signing out:', error);
-        }
+    try {
+        await signOut(auth);
+        localStorage.removeItem('isLoggedIn'); // Clear login state
+        window.location.href = '../index.html';
+    } catch (error) {
+        console.error('Error signing out:', error);
     }
+}
 
     // Auth state observer
     onAuthStateChanged(auth, (user) => {
-        if (!user) {
-            window.location.href = '../auth/login.html';
-        } else {
-            const [firstName, lastName] = (user.displayName || user.email.split('@')[0]).split(' ');
-            
-            document.getElementById('user-name').textContent = user.displayName || user.email.split('@')[0];
-            document.getElementById('user-email').textContent = user.email;
-            document.getElementById('email').value = user.email;
-            document.getElementById('first-name').value = firstName || '';
-            document.getElementById('last-name').value = lastName || '';
+    if (!user && !window.location.pathname.includes('index.html')) {
+        // Only redirect to login if not already going to index and not logged in
+        window.location.href = '../auth/login.html';
+    } else if (user) {
+        // User is logged in, update profile information
+        const [firstName, lastName] = (user.displayName || user.email.split('@')[0]).split(' ');
+        
+        document.getElementById('user-name').textContent = user.displayName || user.email.split('@')[0];
+        document.getElementById('user-email').textContent = user.email;
+        document.getElementById('email').value = user.email;
+        document.getElementById('first-name').value = firstName || '';
+        document.getElementById('last-name').value = lastName || '';
+
+        // Store auth state in localStorage
+        localStorage.setItem('isLoggedIn', 'true');
+    }
+});
+document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        // Don't intercept if it's a login/logout link
+        if (!link.href.includes('login.html') && !link.href.includes('logout')) {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (!isLoggedIn) {
+                e.preventDefault();
+                window.location.href = '../auth/login.html';
+            }
+        }
+    });
+});
+</script>
+<!-- Add this after your existing scripts but before </body> -->
+<script type="module">
+    import { initAuthGuard } from '../assets/javascript/auth-guard.js';
+    
+    // Initialize auth guard
+    document.addEventListener('DOMContentLoaded', () => {
+        const isLoggedIn = initAuthGuard();
+        if (isLoggedIn) {
+            window.location.href = '../pages/account.html';
         }
     });
 </script>
