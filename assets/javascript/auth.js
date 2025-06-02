@@ -38,8 +38,10 @@ export const login = async (email, password) => {
 export const logout = async () => {
   try {
     await signOut(auth);
+    window.location.href = '../home.html'; // Redirect to home page
     return { success: true };
   } catch (error) {
+    console.error("Logout error:", error);
     return { success: false, error: error.message };
   }
 };
