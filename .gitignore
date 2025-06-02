@@ -1,2 +1,4 @@
 assets/javascript/firebase-config.js
 node_modules/
+.env
+.vscode/
