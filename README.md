@@ -1,4 +1,4 @@
-# 🛒 QuickMart
+# QuickMart (UI)  
 
 QuickMart is a simple and responsive grocery shopping web app where users can sign up, log in, and buy groceries online. It uses Firebase for authentication and is built using HTML, CSS, and JavaScript.
 
