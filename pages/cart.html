@@ -159,7 +159,8 @@
     <footer>
         <p>&copy; 2025 QuickMart. All Rights Reserved.</p>
     </footer>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         // Update shop page to use ₹ as well (if you're using the same products)
         const products = [
@@ -206,84 +207,95 @@
                 category: "Meat"
             }
         ];
+    // Initialize cart
+    let cart = JSON.parse(localStorage.getItem('quickmart-cart')) || [];
+    console.log('Initial cart:', cart); // Debug log
 
-        // Retrieve cart from local storage or previous page
-        let cart = JSON.parse(localStorage.getItem('quickmart-cart')) || [];
+    function renderCartItems() {
+        const cartContainer = document.getElementById('cart-items-container');
+        cartContainer.innerHTML = '';
 
-        function renderCartItems() {
-            const cartContainer = document.getElementById('cart-items-container');
-            cartContainer.innerHTML = ''; // Clear existing items
+        if (!cart || cart.length === 0) {
+            cartContainer.innerHTML = '<p class="text-center">Your cart is empty</p>';
+            return;
+        }
 
-            cart.forEach(item => {
-                const cartItemDiv = document.createElement('div');
-                cartItemDiv.className = 'cart-item';
-                cartItemDiv.innerHTML = `
-                    <div class="d-flex align-items-center">
-                        <img src="${item.image}" alt="${item.name}">
-                        <div>
-                            <h6>${item.name}</h6>
-                            <p>₹${item.price.toFixed(2)} x ${item.quantity}</p>
-                        </div>
+        cart.forEach(item => {
+            const cartItemDiv = document.createElement('div');
+            cartItemDiv.className = 'cart-item';
+            cartItemDiv.innerHTML = `
+                <div class="d-flex align-items-center">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>
+                        <h6>${item.name}</h6>
+                        <p>₹${item.price.toFixed(2)} x ${item.quantity}</p>
                     </div>
-                    <strong>₹${(item.price * item.quantity).toFixed(2)}</strong>
-                `;
-                cartContainer.appendChild(cartItemDiv);
-            });
-
-            updateOrderSummary();
-        }
-
-        function updateOrderSummary() {
-            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-            const tax = subtotal * 0.10; // 10% tax
-            const total = subtotal + tax;
-
-            document.getElementById('cart-subtotal').textContent = `₹${subtotal.toFixed(2)}`;
-            document.getElementById('cart-tax').textContent = `₹${tax.toFixed(2)}`;
-            document.getElementById('cart-total').textContent = `₹${total.toFixed(2)}`;
-        }
-
-        document.getElementById('place-order-btn').addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // Basic form validation
-            const form = document.getElementById('checkout-form');
-            if (form.checkValidity() === false) {
-                form.classList.add('was-validated');
-                return;
-            }
-
-            // Simulate order placement
-            if (cart.length > 0) {
-                alert('Order placed successfully! Thank you for shopping with QuickMart.');
-                
-                // Clear cart and local storage
-                cart = [];
-                localStorage.removeItem('quickmart-cart');
-                
-                // Redirect to confirmation or home page
-                window.location.href = '../index.html';
-            } else {
-                alert('Your cart is empty!');
-            }
+                </div>
+                <strong>₹${(item.price * item.quantity).toFixed(2)}</strong>
+            `;
+            cartContainer.appendChild(cartItemDiv);
         });
 
-        // Initialize page
-        renderCartItems();
-    </script>
+        updateOrderSummary();
+    }
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <!-- Add this after your existing scripts but before </body> -->
-<script type="module">
-    import { initAuthGuard } from '../assets/javascript/auth-guard.js';
-    
-    // Initialize auth guard
-    document.addEventListener('DOMContentLoaded', () => {
-        const isLoggedIn = initAuthGuard();
-        if (isLoggedIn) {
-            window.location.href = '../pages/account.html';
+    function updateOrderSummary() {
+        const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        const tax = subtotal * 0.10;
+        const total = subtotal + tax;
+
+        document.getElementById('cart-subtotal').textContent = `₹${subtotal.toFixed(2)}`;
+        document.getElementById('cart-tax').textContent = `₹${tax.toFixed(2)}`;
+        document.getElementById('cart-total').textContent = `₹${total.toFixed(2)}`;
+    }
+
+    document.getElementById('place-order-btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            return;
         }
+
+        const form = document.getElementById('checkout-form');
+        if (!form.checkValidity()) {
+            form.classList.add('was-validated');
+            return;
+        }
+
+        // Create order summary
+        const orderSummary = {
+            items: cart,
+            shipping: {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                zipCode: document.getElementById('zipCode').value
+            },
+            payment: document.getElementById('paymentMethod').value,
+            subtotal: parseFloat(document.getElementById('cart-subtotal').textContent.replace('₹', '')),
+            tax: parseFloat(document.getElementById('cart-tax').textContent.replace('₹', '')),
+            total: parseFloat(document.getElementById('cart-total').textContent.replace('₹', ''))
+        };
+
+        // Save order and clear cart
+        localStorage.setItem('quickmart-last-order', JSON.stringify(orderSummary));
+        localStorage.removeItem('quickmart-cart');
+        cart = [];
+
+        // Redirect to confirmation page
+        window.location.href = 'order-conf.html';
+    });
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', () => {
+        renderCartItems();
     });
 </script>
+
+    
 </body>
 </html>
