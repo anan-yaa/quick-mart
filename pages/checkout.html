@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="icon" type="image/png" href="../assets/images/icon.png" />
+    <style>
+    .checkout-container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+    .form-section {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .order-summary {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .cart-item {
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+    .cart-item:last-child {
+        border-bottom: none;
+    }
+</style>
+</head>
+<body>
+<div class="container checkout-container">
+            <h2 class="text-center mb-4">Checkout</h2>
+
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="form-section">
+                        <h4>Shipping Information</h4>
+                        <form id="checkout-form">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="address" required>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="city" class="form-label">City</label>
+                                    <input type="text" class="form-control" id="city" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="state" class="form-label">State</label>
+                                    <input type="text" class="form-control" id="state" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="zipCode" class="form-label">Zip Code</label>
+                                    <input type="text" class="form-control" id="zipCode" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="paymentMethod" class="form-label">Payment Method</label>
+                                <select class="form-select" id="paymentMethod" required>
+                                    <option value="">Choose Payment Method</option>
+
+                                    <option value="cod">Cash on Delivery</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="order-summary">
+                        <h4>Order Summary</h4>
+                        <div id="cart-items-container">
+                            <!-- Cart items will be dynamically added here -->
+                        </div>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between">
+                                <strong>Subtotal:</strong>
+                                <span id="cart-subtotal">₹0.00</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <strong>Tax (10%):</strong>
+                                <span id="cart-tax">₹0.00</span>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5>Total:</h5>
+                                <h5 id="cart-total">₹0.00</h5>
+                            </div>
+                        </div>
+                        <button id="place-order-btn" class="btn btn-primary w-100 mt-3">Place Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <script>
+    // Load order summary from localStorage
+    // Replace the existing order summary check with:
+const orderSummary = JSON.parse(localStorage.getItem('quickmart-order-summary'));
+
+if (!orderSummary || !orderSummary.items || orderSummary.items.length === 0) {
+    alert('No items in cart!');
+    window.location.href = 'cart.html';
+}
+
+    // Display order items
+    const cartContainer = document.getElementById('cart-items-container');
+    orderSummary.items.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+        itemDiv.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="mb-0">${item.name}</h6>
+                    <small class="text-muted">₹${item.price.toFixed(2)} x ${item.quantity}</small>
+                </div>
+                <strong>₹${(item.price * item.quantity).toFixed(2)}</strong>
+            </div>
+        `;
+        cartContainer.appendChild(itemDiv);
+    });
+
+    // Update order summary
+    document.getElementById('cart-subtotal').textContent = `₹${orderSummary.subtotal}`;
+    document.getElementById('cart-tax').textContent = `₹${orderSummary.tax}`;
+    document.getElementById('cart-total').textContent = `₹${orderSummary.total}`;
+
+    // Handle order placement
+    document.getElementById('place-order-btn').addEventListener('click', async (e) => {
+        e.preventDefault();
+        
+        const form = document.getElementById('checkout-form');
+        if (!form.checkValidity()) {
+            form.classList.add('was-validated');
+            return;
+        }
+
+        // Get form data
+        const orderData = {
+            ...orderSummary,
+            shipping: {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                zipCode: document.getElementById('zipCode').value
+            },
+            paymentMethod: document.getElementById('paymentMethod').value,
+            orderDate: new Date().toISOString()
+        };
+
+        // Store order data
+        localStorage.setItem('quickmart-last-order', JSON.stringify(orderData));
+        
+        // Clear cart
+        localStorage.removeItem('quickmart-cart');
+        localStorage.removeItem('quickmart-order-summary');
+
+        // Show success message and redirect
+        alert('Order placed successfully! Thank you for shopping with us.');
+        window.location.href = '../pages/order-conf.html';
+    });
+</script>
+
+<script type="module">
+    import { initAuthGuard } from '../assets/javascript/auth-guard.js';
+    
+    // Initialize auth guard
+    document.addEventListener('DOMContentLoaded', () => {
+        const isLoggedIn = initAuthGuard();
+        if (!isLoggedIn) {
+            window.location.href = '../auth/login.html';
+        }
+    });
+</script>
+    </body>
+    </html>
+
+    
