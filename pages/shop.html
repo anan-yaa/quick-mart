@@ -170,7 +170,7 @@
         ];
 
         // Cart functionality
-        let cart = [];
+        let cart = JSON.parse(localStorage.getItem('quickmart-cart')) || [];
 
         function renderProducts() {
             const container = document.getElementById('product-container');
@@ -211,26 +211,33 @@
         }
 
         function addToCart(productId) {
-            const quantityInput = document.getElementById(`quantity-${productId}`);
-            const quantity = parseInt(quantityInput.value);
-            
-            if (quantity > 0) {
-                const product = products.find(p => p.id === productId);
-                const existingCartItem = cart.find(item => item.id === productId);
-                
-                if (existingCartItem) {
-                    existingCartItem.quantity += quantity;
-                } else {
-                    cart.push({
-                        ...product,
-                        quantity: quantity
-                    });
-                }
-
-                updateCartSummary();
-                quantityInput.value = 0;
-            }
+    const quantityInput = document.getElementById(`quantity-${productId}`);
+    const quantity = parseInt(quantityInput.value);
+    
+    if (quantity > 0) {
+        const product = products.find(p => p.id === productId);
+        const existingCartItem = cart.find(item => item.id === productId);
+        
+        if (existingCartItem) {
+            existingCartItem.quantity += quantity;
+        } else {
+            cart.push({
+                ...product,
+                quantity: quantity
+            });
         }
+
+        // Save cart to localStorage
+        localStorage.setItem('quickmart-cart', JSON.stringify(cart));
+
+        // Update UI
+        updateCartSummary();
+        quantityInput.value = 0;
+
+        // Show success message
+        alert(`Added ${quantity} ${product.name} to cart!`);
+    }
+}
 
         function updateCartSummary() {
             const cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
@@ -241,29 +248,42 @@
         }
 
         // Checkout button event listener
-        document.getElementById('checkout-btn').addEventListener('click', () => {
-            if (cart.length > 0) {
-                window.location.href = 'cart.html';
-            } else {
-                const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-                errorModal.show();
-            }
-        });
+        // Checkout button event listener
+document.getElementById('checkout-btn').addEventListener('click', () => {
+    if (cart.length > 0) {
+        // Calculate totals
+        const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        const tax = subtotal * 0.10;
+        const total = subtotal + tax;
+
+        // Create order summary
+        const orderSummary = {
+            items: cart,
+            subtotal: subtotal.toFixed(2),
+            tax: tax.toFixed(2),
+            total: total.toFixed(2),
+            timestamp: new Date().toISOString()
+        };
+
+        // Store order summary for cart page
+        localStorage.setItem('quickmart-order-summary', JSON.stringify(orderSummary));
+        
+        // Navigate to cart page
+        window.location.href = 'cart.html';
+    } else {
+        const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+        errorModal.show();
+    }
+});
 
         // Initialize products on page load
-        renderProducts();
+       // Add this right before renderProducts():
+document.addEventListener('DOMContentLoaded', () => {
+    renderProducts();
+    updateCartSummary(); // Add this line to show initial cart state
+});
+
+// Remove the standalone renderProducts() call
     </script>
-    <!-- Add this after your existing scripts but before </body> -->
-<script type="module">
-    import { initAuthGuard } from '../assets/javascript/auth-guard.js';
-    
-    // Initialize auth guard
-    document.addEventListener('DOMContentLoaded', () => {
-        const isLoggedIn = initAuthGuard();
-        if (isLoggedIn) {
-            window.location.href = '../pages/account.html';
-        }
-    });
-</script>
 </body>
 </html>
