@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="../assets/images/icon.png" />
+    <link rel="icon" type="image/png" href="../assets/images/qm-logo.ico" />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -52,11 +52,11 @@
             margin-bottom: 15px;
             padding: 15px;
         }
-        /* New styles for email wrapping */
+
         .profile-header-text {
             overflow-wrap: break-word;
             word-wrap: break-word;
-            max-width: 200px; /* Adjust as needed */
+            max-width: 200px; 
         }
     </style>
 </head>
@@ -90,6 +90,24 @@
             </div>
         </header>
     </div>
+    <!-- toast success message -->
+<div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+    <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+            <strong class="me-auto">Success</strong>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body"></div>
+    </div>
+    <!-- toast error message -->
+    <div id="errorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-danger text-white">
+            <strong class="me-auto">Error</strong>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body"></div>
+    </div>
+</div>
 
     <main class="account-container">
         <div class="row">
@@ -112,43 +130,42 @@
             </div>
             <div class="col-md-9">
                 <div class="account-content tab-content" id="v-pills-tabContent">
-                    <!-- Profile Tab -->
-                    <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel">
-                        <h3>My Profile</h3>
-                        <form id="profile-form">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="first-name" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="last-name" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Date of Birth</label>
-                                <input type="text" class="form-control" id="dob" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Update Profile</button>
-                        </form>
-                    </div>
+                   <!-- profile tab -->
+    <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel">
+    <h3>My Profile</h3>
+    <form id="profile-form">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">First Name</label>
+                <input type="text" class="form-control" id="first-name" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="last-name" required>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" id="dob" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+</div>
 
-                    <!-- Orders Tab -->
-                    <div class="tab-pane fade" id="v-pills-orders" role="tabpanel">
-                        <h3>My Orders</h3>
-                        <div id="orders-container">
-                            <div class="order-card">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <h5>Order #1234</h5>
-                                        <p>Placed on: 15 March 2025</p>
-                                    </div>
-                                    <div class="text-end">
+<div class="tab-pane fade" id="v-pills-orders" role="tabpanel">
+    <h3>My Orders</h3>
+    <div id="orders-container">
+        <div class="order-card">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h5>Order #1234</h5>
+                    <p>Placed on: 15 March 2025</p>
+                </div>
+                <div class="text-end">
                                         <strong>Total: ₹599.99</strong>
                                         <p class="text-success">Delivered</p>
                                     </div>
@@ -176,49 +193,41 @@
                             </div>
                         </div>
                     </div>
+                   <!-- address tab-->
+<div class="tab-pane fade" id="v-pills-addresses" role="tabpanel">
+    <h3>My Addresses</h3>
+    <form id="address-form">
+        <div class="mb-3">
+            <label class="form-label">Street Address</label>
+            <input type="text" class="form-control" id="street-address" required>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">City</label>
+                <input type="text" class="form-control" id="city" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">State</label>
+                <input type="text" class="form-control" id="state" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Postal Code</label>
+                <input type="text" class="form-control" id="postal-code" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Country</label>
+                <input type="text" class="form-control" id="country" required>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Address</button>
+    </form>
+</div>
 
-                    <!-- Addresses Tab -->
-                    <div class="tab-pane fade" id="v-pills-addresses" role="tabpanel">
-                        <h3>My Addresses</h3>
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">Home Address</h5>
-                                <p>
-                                    Alicia H<br>
-                                    123 Main Street, Apartment 45<br>
-                                    Mumbai, Maharashtra 400001<br>
-                                    India
-                                </p>
-                                <div class="d-flex justify-content-between">
-                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
-                                    <button class="btn btn-sm btn-outline-danger">Remove</button>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary">Add New Address</button>
-                    </div>
-
-                    <!-- Account Settings Tab -->
                     <div class="tab-pane fade" id="v-pills-settings" role="tabpanel">
                         <h3>Account Settings</h3>
-                        <div class="mb-4">
-                            <h5>Change Password</h5>
-                            <form id="password-form">
-                                <div class="mb-3">
-                                    <label class="form-label">Current Password</label>
-                                    <input type="password" class="form-control" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">New Password</label>
-                                    <input type="password" class="form-control" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Confirm New Password</label>
-                                    <input type="password" class="form-control" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Change Password</button>
-                            </form>
-                        </div>
+                    
                         <div>
                             <h5>Account Preferences</h5>
                             <div class="form-check">
@@ -246,37 +255,140 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
   <script type="module">
+    import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
     import { app } from '../assets/javascript/firebase-config.js';
     import { getAuth, onAuthStateChanged, updateProfile, updatePassword, signOut } 
     from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
     const auth = getAuth(app);
+    const db = getFirestore(app);
 
-    // Profile form submission
-    document.getElementById('profile-form').addEventListener('submit', async function(e) {
+function showToast(type, message) {
+    const toast = document.getElementById(`${type}Toast`);
+    const toastBody = toast.querySelector('.toast-body');
+    toastBody.textContent = message;
+
+    const bsToast = new bootstrap.Toast(toast, {
+        delay: 3000 
+    });
+    bsToast.show();
+}
+document.getElementById('profile-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const user = auth.currentUser;
+    if (user) {
+        try {
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const fullName = `${firstName} ${lastName}`.trim();
+            const dob = document.getElementById('dob').value;
+            const email = document.getElementById('email').value;
+
+            await updateProfile(user, {
+                displayName: fullName
+            });
+            const userRef = doc(db, 'users', user.uid);
+            await setDoc(userRef, {
+                firstName,
+                lastName,
+                email,
+                dob,
+                displayName: fullName,
+                updatedAt: new Date().toISOString()
+            }, { merge: true });
+
+            document.getElementById('user-name').textContent = fullName;
+            document.getElementById('user-email').textContent = email;
+
+            showToast('success', 'Profile updated successfully!');
+
+        } catch (error) {
+            console.error('Update error:', error);
+            showToast('error','Error updating profile: ' + error.message);
+        }
+    } else {
+        showToast('error', 'Please log in to update your profile');
+        window.location.href = '../auth/login.html';
+    }
+});
+
+    document.getElementById('address-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         const user = auth.currentUser;
         if (user) {
             try {
-                const firstName = document.getElementById('first-name').value;
-                const lastName = document.getElementById('last-name').value;
-                const fullName = `${firstName} ${lastName}`.trim();
+                const address = {
+                    street: document.getElementById('street-address').value,
+                    city: document.getElementById('city').value,
+                    state: document.getElementById('state').value,
+                    postalCode: document.getElementById('postal-code').value,
+                    country: document.getElementById('country').value
+                };
 
-                await updateProfile(user, {
-                    displayName: fullName
-                });
+                const userRef = doc(db, 'users', user.uid);
+                await setDoc(userRef, {
+                    address,
+                    updatedAt: new Date().toISOString()
+                }, { merge: true });
 
-                // Update display immediately
-                document.getElementById('user-name').textContent = fullName;
-                alert('Profile updated successfully!');
+                showToast('success', 'Address updated successfully!');
             } catch (error) {
                 console.error('Update error:', error);
-                alert('Error updating profile: ' + error.message);
+                showToast('error', 'Error updating address: ' + error.message);
             }
         }
     });
 
-    // Password form submission
+async function loadUserData() {
+    const user = auth.currentUser;
+    if (user) {
+        try {
+            const userRef = doc(db, 'users', user.uid);
+            const userDoc = await getDoc(userRef);
+            
+            if (userDoc.exists()) {
+                const data = userDoc.data();
+                
+                document.getElementById('first-name').value = data.firstName || '';
+                document.getElementById('last-name').value = data.lastName || '';
+                document.getElementById('email').value = data.email || '';
+                document.getElementById('dob').value = data.dob || '';
+                
+                // Fill in address fields if they exist
+                if (data.address) {
+                    document.getElementById('street-address').value = data.address.street || '';
+                    document.getElementById('city').value = data.address.city || '';
+                    document.getElementById('state').value = data.address.state || '';
+                    document.getElementById('postal-code').value = data.address.postalCode || '';
+                    document.getElementById('country').value = data.address.country || '';
+                }
+            }
+        } catch (error) {
+            console.error('Error loading user data:', error);
+        }
+    }
+}
+
+    // Update the auth state observer
+    onAuthStateChanged(auth, (user) => {
+        if (!user && !window.location.pathname.includes('index.html')) {
+            window.location.href = '../auth/login.html';
+        } else if (user) {
+            const [firstName, lastName] = (user.displayName || user.email.split('@')[0]).split(' ');
+            
+            document.getElementById('user-name').textContent = user.displayName || user.email.split('@')[0];
+            document.getElementById('user-email').textContent = user.email;
+            document.getElementById('email').value = user.email;
+            document.getElementById('first-name').value = firstName || '';
+            document.getElementById('last-name').value = lastName || '';
+            
+            // Load additional user data
+            loadUserData();
+
+            localStorage.setItem('isLoggedIn', 'true');
+        }
+    });
+
     document.getElementById('password-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         const user = auth.currentUser;
@@ -285,47 +397,26 @@
         if (user) {
             try {
                 await updatePassword(user, newPassword);
-                alert('Password updated successfully!');
+                showToast('success', 'Password updated successfully!');
                 document.getElementById('password-form').reset();
             } catch (error) {
-                alert('Error updating password: ' + error.message);
+                showToast('error', 'Error updating password: ' + error.message);
             }
         }
     });
 
-    // Logout function
     window.logout = async function() {
     try {
         await signOut(auth);
-        localStorage.removeItem('isLoggedIn'); // Clear login state
+        localStorage.removeItem('isLoggedIn');
         window.location.href = '../index.html';
     } catch (error) {
         console.error('Error signing out:', error);
+        showToast('error', 'Error signing out: ' + error.message);
     }
 }
-
-    // Auth state observer
-    onAuthStateChanged(auth, (user) => {
-    if (!user && !window.location.pathname.includes('index.html')) {
-        // Only redirect to login if not already going to index and     not logged in
-        window.location.href = '../auth/login.html';
-    } else if (user) {
-        // User is logged in, update profile information
-        const [firstName, lastName] = (user.displayName || user.email.split('@')[0]).split(' ');
-        
-        document.getElementById('user-name').textContent = user.displayName || user.email.split('@')[0];
-        document.getElementById('user-email').textContent = user.email;
-        document.getElementById('email').value = user.email;
-        document.getElementById('first-name').value = firstName || '';
-        document.getElementById('last-name').value = lastName || '';
-
-        // Store auth state in localStorage
-        localStorage.setItem('isLoggedIn', 'true');
-    }
-});
 document.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', (e) => {
-        // Don't intercept if it's a login/logout link
         if (!link.href.includes('login.html') && !link.href.includes('logout')) {
             const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
             if (!isLoggedIn) {
@@ -336,11 +427,8 @@ document.querySelectorAll('a').forEach(link => {
     });
 });
 </script>
-<!-- Add this after your existing scripts but before </body> -->
 <script type="module">
     import { initAuthGuard } from '../assets/javascript/auth-guard.js';
-    
-    // Initialize auth guard
     document.addEventListener('DOMContentLoaded', () => {
         const isLoggedIn = initAuthGuard();
         if (isLoggedIn) {
@@ -348,5 +436,6 @@ document.querySelectorAll('a').forEach(link => {
         }
     });
 </script>
+
 </body>
 </html>
