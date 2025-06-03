@@ -1,15 +1,24 @@
 
-# Grocery Store Management System
-A simple and efficient web-based solution for managing a grocery store, ensuring smooth inventory tracking, product listing, and customer transactions.
+# 🛒 QuickMart
 
-📌 Features
--User-friendly interface for managing grocery items
--Dynamic product listings with HTML, CSS, and JavaScript
--Interactive shopping cart functionality
--Responsive design for mobile and desktop users
--Fast and seamless checkout process
+QuickMart is a simple and responsive grocery shopping web app where users can sign up, log in, and buy groceries online. It uses Firebase for authentication and is built using HTML, CSS, and JavaScript.
 
-Techstack
-HTML – Structure of the application
-CSS – Styling and layout
->>>>>>> e9b25f9 (Update README.md)
+---
+
+##  Features
+
+- Firebase Authentication (Sign Up / Login / Logout)
+- Add groceries to cart
+- Checkout
+- Responsive UI using HTML & CSS
+
+  
+## 🚀 Tech Stack
+
+- HTML5
+- CSS3
+- JavaScript (Vanilla)
+- Firebase
+
+---
+
