@@ -1,128 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link rel="icon" type="image/png" href="../assets/images/qm-logo.ico" />
-</head>
-<body>
+  </head>
+  <body>
     <div class="background-animation">
-        <div class="shape shape1"></div>
-        <div class="shape shape2"></div>
-        <div class="shape shape3"></div>
+      <div class="shape shape1"></div>
+      <div class="shape shape2"></div>
+      <div class="shape shape3"></div>
     </div>
 
     <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <div class="col-md-3 mb-2 mb-md-0">
-                <a href="../index.html" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <div class="logo-wrapper">
-                        <i class="fas fa-shopping-basket"></i>
-                        <span class="logo-text">Quick Mart</span>
-                    </div>
-                </a>
+      <header
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+      >
+        <div class="col-md-3 mb-2 mb-md-0">
+          <a
+            href="../index.html"
+            class="d-inline-flex link-body-emphasis text-decoration-none"
+          >
+            <div class="logo-wrapper">
+              <i class="fas fa-shopping-basket"></i>
+              <span class="logo-text">Quick Mart</span>
             </div>
-        </header>
-    </div>
-
-    <div class="container">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-lg-5 col-md-8 col-12">
-                <div class="auth-card">
-                    <h1 class="auth-title">Login to QuickMart</h1>
-                    <p class="auth-subtitle">Welcome back! Enter your details to continue shopping.</p>
-                    
-                    <form id="login-form" class="auth-form">
-                        <div class="form-group">
-                            <label for="email"><i class="fas fa-envelope"></i> Email</label>
-                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
-                        </div>
-                        
-                        <div class="form-group password-field position-relative">
-                            <label for="password"><i class="fas fa-lock"></i> Password</label>
-                            <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
-                            
-                            
-                            <span class="password-toggle">
-                                <i class="fas fa-eye-slash"></i>
-                            </span>
-                        </div>
-                         <div id="error-message" class="text-danger mt-2" style="display: none;">
-    Incorrect credentials. Please try again.
-</div>
-            
-                        
-                       <button type="submit" class="btn-primary btn-block">Login</button>
-                        
-                        <div class="auth-footer">
-                            <p>Don't have an account? <a href="register.html">Sign Up</a></p>
-                        </div>
-                    </form>
-                </div>
-            </div>
+          </a>
         </div>
+      </header>
+    </div>
+
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg-5 col-md-8 col-12">
+          <div class="auth-card">
+            <h1 class="auth-title">Login to QuickMart</h1>
+            <p class="auth-subtitle">
+              Welcome back! Enter your details to continue shopping.
+            </p>
+
+            <form id="login-form" class="auth-form">
+              <div class="form-group">
+                <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-control"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+
+              <div class="form-group password-field position-relative">
+                <label for="password"
+                  ><i class="fas fa-lock"></i> Password</label
+                >
+                <input
+                  type="password"
+                  id="password"
+                  class="form-control"
+                  placeholder="Enter your password"
+                  required
+                />
+
+                <span class="password-toggle">
+                  <i class="fas fa-eye-slash"></i>
+                </span>
+              </div>
+              <div
+                id="error-message"
+                class="text-danger mt-2"
+                style="display: none"
+              >
+                Incorrect credentials. Please try again.
+              </div>
+
+              <button type="submit" class="btn-primary btn-block">Login</button>
+
+              <div class="auth-footer">
+                <p>
+                  Don't have an account? <a href="register.html">Sign Up</a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Quick Mart. All rights reserved.</p>
+      <p>&copy; 2025 Quick Mart. All rights reserved.</p>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"> </script>
-    <script type="module">
-    import { login } from '../assets/javascript/auth.js';
-    
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const errorMessage = document.getElementById('error-message');
-        
-        // Hide error message on new attempt
-        errorMessage.style.display = 'none';
-        
-        const result = await login(email, password);
-        if (result.success) {
-            window.location.href = '../pages/account.html';
-        } else {
-            // Show error message instead of alert
-            errorMessage.style.display = 'block';
-        }
-    });
-</script>
-// for password toggle functionality    
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get all password toggle icons
-        const toggleIcons = document.querySelectorAll('.password-toggle');
-        
-        toggleIcons.forEach(toggle => {
-            toggle.addEventListener('click', function() {
-                // Get the parent password field
-                const passwordField = this.closest('.password-field');
-                // Get the input within that field
-                const input = passwordField.querySelector('input');
-                // Get the icon
-                const icon = this.querySelector('i');
-                
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
-                } else {
-                    input.type = 'password';
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
-                }
-            });
-        });
-    });
-</script>
-
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../assets/javascript/login.js"></script>
+    <script src="../assets/javascript/password-toggle.js"></script>
+  </body>
 </html>

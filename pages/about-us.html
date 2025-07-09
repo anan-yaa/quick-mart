@@ -77,17 +77,6 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <!-- Add this after your existing scripts but before </body> -->
-<script type="module">
-    import { initAuthGuard } from '../assets/javascript/auth-guard.js';
-    
-    // Initialize auth guard
-    document.addEventListener('DOMContentLoaded', () => {
-        const isLoggedIn = initAuthGuard();
-        if (isLoggedIn) {
-            window.location.href = '../pages/account.html';
-        }
-    });
-</script>
+    <script type="module" src="../assets/javascript/about-us.js"></script>
 </body>
 </html>

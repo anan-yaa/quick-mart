@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quick Mart</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="icon" type="image/png" href="../assets/images/qm-logo.ico" />
 </head>
+
 <body>
-    <!--background animation--> 
+    <!--background animation-->
     <div class="background-animation">
         <div class="shape shape1"></div>
         <div class="shape shape2"></div>
         <div class="shape shape3"></div>
     </div>
-<!-- Navbar--> <!-- The icon and the name -->
+    <!--navbar ...(icon and name)-->
     <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <header
+            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <div class="col-md-3 mb-2 mb-md-0">
                 <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
                     <div class="logo-wrapper">
@@ -28,14 +32,22 @@
                     </div>
                 </a>
             </div>
-            <!-- Navbar & the middle details -->
+            <!-- navbar...(pages links)-->
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="index.html" class="nav-link px-2 link-secondary">Home</a></li>
-                <li><a href="pages/shop.html" class="nav-link px-2 link-secondary">Shop</a></li>
-                <li><a href="auth/login.html" class="nav-link px-2 link-secondary">Account</a></li>
-                <li><a href="pages/about-us.html" class="nav-link px-2 link-secondary">About Us</a></li>
+                <li>
+                    <a href="index.html" class="nav-link px-2 link-secondary">Home</a>
+                </li>
+                <li>
+                    <a href="pages/shop.html" class="nav-link px-2 link-secondary">Shop</a>
+                </li>
+                <li>
+                    <a href="auth/login.html" class="nav-link px-2 link-secondary">Account</a>
+                </li>
+                <li>
+                    <a href="pages/about-us.html" class="nav-link px-2 link-secondary">About Us</a>
+                </li>
             </ul>
-            <!-- the login&signup buttons -->
+            <!-- navbar ... login&signup buttons -->
             <div class="col-md-3 text-end">
                 <a href="auth/login.html" class="btn btn-primary">Login</a>
                 <a href="auth/register.html" class="btn btn-primary">Sign-up</a>
@@ -44,17 +56,22 @@
     </div>
 
     <main>
+        <!-- carousel without the scrolling? -->
         <section class="hero">
             <div class="hero-text">
                 <h2>Fresh Picks, Fast Checkout – Your One Stop Grocery Spot!</h2>
-                <p>Shop from a wide selection of fresh produce, pantry essentials, and household items - all delivered right to your door.</p>
+                <p>
+                    Shop from a wide selection of fresh produce, pantry essentials, and
+                    household items - all delivered right to your door.
+                </p>
                 <a href="auth/register.html" class="cta-btn">Start Shopping <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="hero-image">
-                <img src="https://cdn.dribbble.com/userupload/13992407/file/original-0de90af3afff6fe2ec9299a9188d1355.png?crop=360x0-1799x1080&format=webp&resize=400x300&vertical=center" alt="Grocery Basket" class="floating">
+                <img src="https://cdn.dribbble.com/userupload/13992407/file/original-0de90af3afff6fe2ec9299a9188d1355.png?crop=360x0-1799x1080&format=webp&resize=400x300&vertical=center"
+                    alt="Grocery Basket" class="floating" />
             </div>
         </section>
-
+        <!-- features section -->
         <section class="features">
             <h2>Why Choose Us</h2>
             <div class="feature-cards">
@@ -76,33 +93,34 @@
             </div>
         </section>
 
-            <section class="categories">
-                <h2>Popular Categories</h2>
-                <div class="category-container">
-                    <div class="category">
-                        <div class="category-icon"><i class="fas fa-apple-whole"></i></div>
-                        <p>Fruits</p>
-                    </div>
-                    <div class="category">
-                        <div class="category-icon"><i class="fas fa-carrot"></i></div>
-                        <p>Vegetables</p>
-                    </div>
-                    <div class="category">
-                        <div class="category-icon"><i class="fas fa-bread-slice"></i></div>
-                        <p>Bakery</p>
-                    </div>
-                    <div class="category">
-                        <div class="category-icon"><i class="fas fa-egg"></i></div>
-                        <p>Dairy</p>
-                    </div>
+        <section class="categories">
+            <h2>Popular Categories</h2>
+            <div class="category-container">
+                <div class="category">
+                    <div class="category-icon"><i class="fas fa-apple-whole"></i></div>
+                    <p>Fruits</p>
                 </div>
-            </section>
+                <div class="category">
+                    <div class="category-icon"><i class="fas fa-carrot"></i></div>
+                    <p>Vegetables</p>
+                </div>
+                <div class="category">
+                    <div class="category-icon"><i class="fas fa-bread-slice"></i></div>
+                    <p>Bakery</p>
+                </div>
+                <div class="category">
+                    <div class="category-icon"><i class="fas fa-egg"></i></div>
+                    <p>Dairy</p>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Quick Mart Grocery. All rights reserved.</p>
+        <p>© 2025 Quick Mart Grocery. All rights reserved.</p>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -1,14 +1,12 @@
 import { auth, app } from './firebase-config.js';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
-// Signup function
+// signup function exported
 export const signup = async (email, password, userData) => {
   console.log("signup function called with userData:", userData);
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     console.log("User created:", result);
-
-    // Update the user's profile with display name
     await updateProfile(result.user, {
       displayName: userData.displayName
     });
@@ -21,7 +19,7 @@ export const signup = async (email, password, userData) => {
   }
 };
 
-// Login function
+// login function exported
 export const login = async (email, password) => {
   console.log("login function called");
   try {
@@ -34,7 +32,7 @@ export const login = async (email, password) => {
   }
 };
 
-// Logout function
+// logout function exported
 export const logout = async () => {
   try {
     await signOut(auth);

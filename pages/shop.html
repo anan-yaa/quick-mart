@@ -1,288 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shop Products</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link rel="icon" type="image/png" href="../assets/images/qm-logo.ico" />
     <style>
-        .product-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .product-image {
-            max-width: 200px;
-            height: 200px;
-            object-fit: cover;
-            margin-bottom: 15px;
-        }
-        .quantity-control {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 10px;
-        }
-        .quantity-control button {
-            width: 40px;
-            height: 40px;
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
-        }
-        .cart-summary {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #f8f9fa;
-            padding: 15px;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
+      .product-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .product-image {
+        max-width: 200px;
+        height: 200px;
+        object-fit: cover;
+        margin-bottom: 15px;
+      }
+      .quantity-control {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+      }
+      .quantity-control button {
+        width: 40px;
+        height: 40px;
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+      }
+      .cart-summary {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f8f9fa;
+        padding: 15px;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="background-animation">
-        <div class="shape shape1"></div>
-        <div class="shape shape2"></div>
-        <div class="shape shape3"></div>
+      <div class="shape shape1"></div>
+      <div class="shape shape2"></div>
+      <div class="shape shape3"></div>
     </div>
 
     <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <div class="col-md-3 mb-2 mb-md-0">
-                <a href="../index.html" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <div class="logo-wrapper">
-                        <i class="fas fa-shopping-basket"></i>
-                        <span class="logo-text">Quick Mart</span>
-                    </div>
-                </a>
+      <header
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+      >
+        <div class="col-md-3 mb-2 mb-md-0">
+          <a
+            href="../index.html"
+            class="d-inline-flex link-body-emphasis text-decoration-none"
+          >
+            <div class="logo-wrapper">
+              <i class="fas fa-shopping-basket"></i>
+              <span class="logo-text">Quick Mart</span>
             </div>
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="../index.html" class="nav-link px-2 link-secondary">Home</a></li>
-                <li><a href="shop.html" class="nav-link px-2 link-secondary">Shop</a></li>
-                <li><a href="account.html" class="nav-link px-2 link-secondary">Account</a></li>
-                <li><a href="about-us.html" class="nav-link px-2 link-secondary">About Us</a></li>
-            </ul>
-            
-            <div class="col-md-3 text-end">
-    
-            </div>
-        </header>
+          </a>
+        </div>
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+          <li>
+            <a href="../index.html" class="nav-link px-2 link-secondary"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a href="shop.html" class="nav-link px-2 link-secondary">Shop</a>
+          </li>
+          <li>
+            <a href="account.html" class="nav-link px-2 link-secondary"
+              >Account</a
+            >
+          </li>
+          <li>
+            <a href="about-us.html" class="nav-link px-2 link-secondary"
+              >About Us</a
+            >
+          </li>
+        </ul>
+
+        <div class="col-md-3 text-end"></div>
+      </header>
     </div>
 
     <main>
-        <div class="container">
-            <h2 class="text-center mb-4">QuickMart Grocery Shop</h2>
-            
-            <div class="row" id="product-container">
-                <!-- Products will be dynamically added here -->
-            </div>
-        </div>
+      <div class="container">
+        <h2 class="text-center mb-4">QuickMart Grocery Shop</h2>
 
-        <div class="cart-summary text-center">
-            <div id="cart-details">
-                <p>Cart Total: ₹<span id="cart-total">0.00</span></p>
-                <p>Total Items: <span id="cart-item-count">0</span></p>
-                <button id="checkout-btn" class="btn btn-primary">Proceed to Checkout</button>
-            </div>
+        <div class="row" id="product-container">
+          <!-- Products will be dynamically added here -->
         </div>
+      </div>
+
+      <div class="cart-summary text-center">
+        <div id="cart-details">
+          <p>Cart Total: ₹<span id="cart-total">0.00</span></p>
+          <p>Total Items: <span id="cart-item-count">0</span></p>
+          <button id="checkout-btn" class="btn btn-primary">
+            Proceed to Checkout
+          </button>
+        </div>
+      </div>
     </main>
 
     <footer>
-        <p>&copy; 2025 QuickMart. All Rights Reserved.</p>
+      <p>&copy; 2025 QuickMart. All Rights Reserved.</p>
     </footer>
 
     <div class="modal fade" id="errorModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Cart is empty :( </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <i class="fas fa-shopping-cart fa-3x text-danger mb-3"></i>
-                    <p>Your cart is empty! Please add items before checking out.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-                </div>
-            </div>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Cart is empty :(</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <i class="fas fa-shopping-cart fa-3x text-danger mb-3"></i>
+            <p>Your cart is empty! Please add items before checking out.</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              OK
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Main Script -->
-    <script>
-        // Product data
-        const products = [
-            {
-                id: 1,
-                name: "Fresh Apples (1kg)",
-                price: 99,
-                image: "../assets/images/apples.webp",
-                category: "Fruits"
-            },
-            {
-                id: 2,
-                name: "Bananas - 1 Dozen",
-                price: 79,
-                image: "../assets/images/bananas.avif",
-                category: "Fruits"
-            },
-            {
-                id: 3,
-                name: "Cow Milk - 1L",
-                price: 59,
-                image: "../assets/images/milk.avif",
-                category: "Dairy"
-            },
-            {
-                id: 4,
-                name: "Fresh Bread Loaf",
-                price: 49,
-                image: "../assets/images/bread.jpg",
-                category: "Bakery"
-            },
-            {
-                id: 5,
-                name: "Eggs - 1 Dozen",
-                price: 99,
-                image: "../assets/images/eggs.avif",
-                category: "Dairy"
-            },
-            {
-                id: 6,
-                name: "Chicken Breast Boneless, 1kg",
-                price: 399,
-                image: "../assets/images/chicken.jpeg",
-                category: "Meat"
-            }
-        ];
-
-        // Cart functionality
-        let cart = JSON.parse(localStorage.getItem('quickmart-cart')) || [];
-
-        function renderProducts() {
-            const container = document.getElementById('product-container');
-            container.innerHTML = '';
-
-            products.forEach(product => {
-                const productDiv = document.createElement('div');
-                productDiv.className = 'col-md-4 mb-4';
-                productDiv.innerHTML = `
-                    <div class="product-card">
-                        <img src="${product.image}" alt="${product.name}" class="product-image">
-                        <h5>${product.name}</h5>
-                        <p>₹${product.price.toFixed(2)}</p>
-                        <div class="quantity-control">
-                            <button onclick="decreaseQuantity(${product.id})">-</button>
-                            <input type="text" id="quantity-${product.id}" value="0" 
-                                   style="width:50px; text-align:center;" readonly>
-                            <button onclick="increaseQuantity(${product.id})">+</button>
-                        </div>
-                        <button onclick="addToCart(${product.id})" 
-                                class="btn btn-primary mt-2">Add to Cart</button>
-                    </div>
-                `;
-                container.appendChild(productDiv);
-            });
-        }
-
-        function increaseQuantity(productId) {
-            const quantityInput = document.getElementById(`quantity-${productId}`);
-            quantityInput.value = parseInt(quantityInput.value) + 1;
-        }
-
-        function decreaseQuantity(productId) {
-            const quantityInput = document.getElementById(`quantity-${productId}`);
-            if (parseInt(quantityInput.value) > 0) {
-                quantityInput.value = parseInt(quantityInput.value) - 1;
-            }
-        }
-
-        function addToCart(productId) {
-    const quantityInput = document.getElementById(`quantity-${productId}`);
-    const quantity = parseInt(quantityInput.value);
-    
-    if (quantity > 0) {
-        const product = products.find(p => p.id === productId);
-        const existingCartItem = cart.find(item => item.id === productId);
-        
-        if (existingCartItem) {
-            existingCartItem.quantity += quantity;
-        } else {
-            cart.push({
-                ...product,
-                quantity: quantity
-            });
-        }
-
-        // Save cart to localStorage
-        localStorage.setItem('quickmart-cart', JSON.stringify(cart));
-
-        // Update UI
-        updateCartSummary();
-        quantityInput.value = 0;
-
-        // Show success message
-        alert(`Added ${quantity} ${product.name} to cart!`);
-    }
-}
-
-        function updateCartSummary() {
-            const cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-            const cartItemCount = cart.reduce((count, item) => count + item.quantity, 0);
-
-            document.getElementById('cart-total').textContent = cartTotal.toFixed(2);
-            document.getElementById('cart-item-count').textContent = cartItemCount;
-        }
-
-        // Checkout button event listener
-        // Checkout button event listener
-document.getElementById('checkout-btn').addEventListener('click', () => {
-    if (cart.length > 0) {
-        // Calculate totals
-        const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-        const tax = subtotal * 0.10;
-        const total = subtotal + tax;
-
-        // Create order summary
-        const orderSummary = {
-            items: cart,
-            subtotal: subtotal.toFixed(2),
-            tax: tax.toFixed(2),
-            total: total.toFixed(2),
-            timestamp: new Date().toISOString()
-        };
-
-        // Store order summary for cart page
-        localStorage.setItem('quickmart-order-summary', JSON.stringify(orderSummary));
-        
-        // Navigate to cart page
-        window.location.href = 'cart.html';
-    } else {
-        const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-        errorModal.show();
-    }
-});
-
-        // Initialize products on page load
-       // Add this right before renderProducts():
-document.addEventListener('DOMContentLoaded', () => {
-    renderProducts();
-    updateCartSummary(); // Add this line to show initial cart state
-});
-
-// Remove the standalone renderProducts() call
-    </script>
-</body>
+    <script src="../assets/javascript/shop.js"></script>
+  </body>
 </html>
