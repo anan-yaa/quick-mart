@@ -99,7 +99,6 @@ body {
     }
 }
 
-/* Bootstrap Navbar Customization */
 .container header {
     background: transparent !important;
     padding: 15px 0;
@@ -174,8 +173,6 @@ body {
     border-color: #218838 !important;
 }
 
-
-/* Hero Section */
 .hero {
     display: flex;
     align-items: center;
@@ -262,7 +259,6 @@ body {
     }
 }
 
-/* CTA Button */
 .cta-btn {
     display: inline-flex;
     align-items: center;
@@ -309,7 +305,6 @@ body {
     transform: translateX(4px);
 }
 
-/* Features Section */
 .features {
     text-align: center;
     margin: 60px auto;
@@ -398,7 +393,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Categories Section */
 .categories {
     margin: 60px auto;
     text-align: center;
@@ -474,7 +468,6 @@ body {
     color: white;
 }
 
-/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -509,7 +502,6 @@ body {
     }
 }
 
-/* Footer */
 footer {
     margin-top: 50px;
     background: var(--dark);
@@ -518,7 +510,6 @@ footer {
     text-align: center;
 }
 
-/* Responsive Design */
 @media screen and (max-width: 1024px) {
     .hero {
         flex-direction: column;
@@ -561,9 +552,6 @@ footer {
     }
 }
 
-/* Existing CSS remains unchanged */
-
-/* Auth Pages (Login & Register) Styling */
 .auth-card {
     background: white;
     border-radius: 15px;
@@ -699,7 +687,6 @@ footer {
     text-decoration: underline;
 }
 
-/* Responsive adjustments for auth pages */
 @media screen and (max-width: 768px) {
     .auth-card {
         padding: 25px;
@@ -711,7 +698,6 @@ footer {
     }
 }
 
-/* About Us Page Specific Styles */
 .about-us-content {
     max-width: 900px;
     margin: 0 auto;
@@ -792,7 +778,6 @@ footer {
     font-size: 1.2em;
 }
 
-/* Responsive Adjustments */
 @media screen and (max-width: 768px) {
     .about-us-content {
         padding: 20px 15px;

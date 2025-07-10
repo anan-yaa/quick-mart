@@ -45,7 +45,7 @@ const products = [
 
 // initial cart (empty)
 let cart = JSON.parse(localStorage.getItem("quickmart-cart")) || [];
-console.log("Initial cart:", cart); 
+console.log("Initial cart:", cart);
 
 function renderCartItems() {
   const cartContainer = document.getElementById("cart-items-container");
@@ -94,7 +94,11 @@ document.getElementById("place-order-btn").addEventListener("click", (e) => {
   e.preventDefault();
 
   if (cart.length === 0) {
-    alert("Your cart is empty!");
+    showCartToast(
+      "Your Cart is Empty",
+      "Please add items to your cart.",
+      "bg-warning"
+    );
     return;
   }
 
@@ -136,3 +140,39 @@ document.getElementById("place-order-btn").addEventListener("click", (e) => {
 document.addEventListener("DOMContentLoaded", () => {
   renderCartItems();
 });
+
+// Utility to show cart toast
+function showCartToast(title, message, bgClass = "bg-primary") {
+  const toastEl = document.getElementById("cartToast");
+  const toastTitle = document.getElementById("cartToastTitle");
+  const toastBody = document.getElementById("cartToastBody");
+  const header = toastEl.querySelector(".toast-header");
+
+  // Reset background
+  header.className = "toast-header text-white " + bgClass;
+
+  toastTitle.textContent = title;
+  toastBody.textContent = message;
+
+  // Bootstrap 5 toast
+  const toast = new bootstrap.Toast(toastEl);
+  toast.show();
+}
+
+// Example usage:
+function onAddToCart(item) {
+  // ... your add to cart logic ...
+  showCartToast(
+    "Items Added",
+    `"${item.name}" has been added to your cart.`,
+    "bg-success"
+  );
+}
+
+function onCartEmpty() {
+  showCartToast(
+    "Your Cart is Empty",
+    "Please add items to your cart.",
+    "bg-warning"
+  );
+}

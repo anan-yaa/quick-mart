@@ -46,8 +46,6 @@ async function loadUserData() {
         document.getElementById("last-name").value = data.lastName || "";
         document.getElementById("email").value = data.email || "";
         document.getElementById("dob").value = data.dob || "";
-
-        // Fill in address fields if they exist
         if (data.address) {
           document.getElementById("street-address").value =
             data.address.street || "";
@@ -72,7 +70,6 @@ onAuthStateChanged(auth, (user) => {
 
   if (!user) {
     console.log("No user, checking if should redirect to login");
-    // Temporarily disable redirect to test logout
     console.log("User logged out - not redirecting to allow logout to work");
   } else if (user) {
     console.log("User is logged in, updating UI");
@@ -93,23 +90,15 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-// Logout functionality
 async function logout() {
   console.log("Logout function called");
   try {
-    // Remove login status first to prevent redirect loops
     localStorage.removeItem("isLoggedIn");
     console.log("Removed login status from localStorage");
-
-    // Clear cart data
     localStorage.removeItem("quickmart-cart");
     console.log("Cleared cart from localStorage");
-
-    // Sign out from Firebase
     await signOut(auth);
     console.log("Firebase signOut completed");
-
-    // Redirect to home page
     console.log("Redirecting to home page");
     window.location.href = "../index.html";
   } catch (error) {
@@ -118,15 +107,11 @@ async function logout() {
   }
 }
 
-// Add event listeners when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
-  // Logout button
   const logoutBtn = document.getElementById("logout-btn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", logout);
   }
-
-  // Profile form
   const profileForm = document.getElementById("profile-form");
   if (profileForm) {
     profileForm.addEventListener("submit", async function (e) {
@@ -174,7 +159,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Address form
   const addressForm = document.getElementById("address-form");
   if (addressForm) {
     addressForm.addEventListener("submit", async function (e) {
@@ -211,7 +195,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Password form
   const passwordForm = document.getElementById("password-form");
   if (passwordForm) {
     passwordForm.addEventListener("submit", async function (e) {

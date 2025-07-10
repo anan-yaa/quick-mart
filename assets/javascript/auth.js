@@ -40,16 +40,9 @@ export const login = async (email, password) => {
 // logout function exported
 export const logout = async () => {
   try {
-    // Remove login status first to prevent redirect loops
     localStorage.removeItem("isLoggedIn");
-    
-    // Clear cart data
     localStorage.removeItem("quickmart-cart");
-    
-    // Sign out from Firebase
     await signOut(auth);
-    
-    // Redirect to home page
     window.location.href = "../index.html";
     return { success: true };
   } catch (error) {

@@ -141,7 +141,11 @@ function addToCart(productId) {
 
     updateCartSummary();
     quantityInput.value = 0;
-    alert(`Added ${quantity} ${product.name} to cart!`);
+    showCartToast(
+      "Items Added",
+      `Added ${quantity} ${product.name} to cart!`,
+      "bg-success"
+    );
   }
 }
 
@@ -201,8 +205,48 @@ async function logout() {
     window.location.href = "../index.html";
   } catch (error) {
     console.error("Error signing out:", error);
-    alert("Error signing out: " + error.message);
+    showCartToast(
+      "Sign Out Error",
+      "Error signing out: " + error.message,
+      "bg-danger"
+    );
   }
+}
+
+// Utility to show cart toast
+function showCartToast(title, message, bgClass = "bg-primary") {
+  const toastEl = document.getElementById("cartToast");
+  const toastTitle = document.getElementById("cartToastTitle");
+  const toastBody = document.getElementById("cartToastBody");
+  const header = toastEl.querySelector(".toast-header");
+
+  // Reset background
+  header.className = "toast-header text-white " + bgClass;
+
+  toastTitle.textContent = title;
+  toastBody.textContent = message;
+
+  // Bootstrap 5 toast
+  const toast = new bootstrap.Toast(toastEl);
+  toast.show();
+}
+
+// Example usage:
+function onAddToCart(item) {
+  // ... your add to cart logic ...
+  showCartToast(
+    "Items Added",
+    `"${item.name}" has been added to your cart.`,
+    "bg-success"
+  );
+}
+
+function onCartEmpty() {
+  showCartToast(
+    "Your Cart is Empty",
+    "Please add items to your cart.",
+    "bg-warning"
+  );
 }
 
 document.addEventListener("DOMContentLoaded", () => {
