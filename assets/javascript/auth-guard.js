@@ -5,11 +5,14 @@ export function initAuthGuard() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             localStorage.setItem('isLoggedIn', 'true');
-        } else if (!window.location.pathname.includes('index.html') && 
-                   !window.location.pathname.includes('login.html') &&
-                   !window.location.pathname.includes('register.html')) {
+        } else {
             localStorage.removeItem('isLoggedIn');
-            window.location.href = '../auth/login.html';
+            if (!window.location.pathname.includes('index.html') && 
+                !window.location.pathname.includes('login.html') &&
+                !window.location.pathname.includes('register.html') &&
+                !window.location.pathname.includes('auth/')) {
+                window.location.href = '../auth/login.html';
+            }
         }
     });
 }

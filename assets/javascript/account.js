@@ -54,7 +54,9 @@ document
             displayName: fullName,
             updatedAt: new Date().toISOString(),
           },
-          { merge: true }
+          {
+            merge: true,
+          }
         );
 
         document.getElementById("user-name").textContent = fullName;
@@ -93,7 +95,9 @@ document
             address,
             updatedAt: new Date().toISOString(),
           },
-          { merge: true }
+          {
+            merge: true,
+          }
         );
 
         showToast("success", "Address updated successfully!");
@@ -137,9 +141,17 @@ async function loadUserData() {
 }
 
 onAuthStateChanged(auth, (user) => {
-  if (!user && !window.location.pathname.includes("index.html")) {
-    window.location.href = "../auth/login.html";
+  console.log(
+    "Auth state changed:",
+    user ? "User logged in" : "User logged out"
+  );
+
+  if (!user) {
+    console.log("No user, checking if should redirect to login");
+    // Temporarily disable redirect to test logout
+    console.log("User logged out - not redirecting to allow logout to work");
   } else if (user) {
+    console.log("User is logged in, updating UI");
     const [firstName, lastName] = (
       user.displayName || user.email.split("@")[0]
     ).split(" ");
@@ -176,17 +188,6 @@ document
       }
     }
   });
-
-window.logout = async function () {
-  try {
-    await signOut(auth);
-    localStorage.removeItem("isLoggedIn");
-    window.location.href = "../index.html";
-  } catch (error) {
-    console.error("Error signing out:", error);
-    showToast("error", "Error signing out: " + error.message);
-  }
-};
 
 document.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", (e) => {

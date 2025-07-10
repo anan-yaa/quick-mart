@@ -1,5 +1,10 @@
-import { auth, app } from './firebase-config.js';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+import { auth, app } from "./firebase-config.js";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 // signup function exported
 export const signup = async (email, password, userData) => {
@@ -8,7 +13,7 @@ export const signup = async (email, password, userData) => {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     console.log("User created:", result);
     await updateProfile(result.user, {
-      displayName: userData.displayName
+      displayName: userData.displayName,
     });
     console.log("Profile updated with name:", userData.displayName);
 
@@ -35,8 +40,14 @@ export const login = async (email, password) => {
 // logout function exported
 export const logout = async () => {
   try {
+    // Remove login status first to prevent redirect loops
+    localStorage.removeItem("isLoggedIn");
+
+    // Sign out from Firebase
     await signOut(auth);
-    window.location.href = '../home.html'; // Redirect to home page
+
+    // Redirect to home page
+    window.location.href = "../index.html";
     return { success: true };
   } catch (error) {
     console.error("Logout error:", error);
