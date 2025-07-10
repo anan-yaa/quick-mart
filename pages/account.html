@@ -414,6 +414,10 @@
                 localStorage.removeItem("isLoggedIn");
                 console.log("Removed login status from localStorage");
                 
+                // Clear cart data
+                localStorage.removeItem("quickmart-cart");
+                console.log("Cleared cart from localStorage");
+                
                 // Sign out from Firebase
                 await signOut(auth);
                 console.log("Firebase signOut completed");
