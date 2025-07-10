@@ -1,3 +1,8 @@
+const bootstrapScript = document.createElement("script");
+bootstrapScript.src =
+  "https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js";
+document.head.appendChild(bootstrapScript);
+
 import {
   getFirestore,
   doc,
@@ -26,87 +31,6 @@ function showToast(type, message) {
   });
   bsToast.show();
 }
-
-document
-  .getElementById("profile-form")
-  .addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const user = auth.currentUser;
-    if (user) {
-      try {
-        const firstName = document.getElementById("first-name").value;
-        const lastName = document.getElementById("last-name").value;
-        const fullName = `${firstName} ${lastName}`.trim();
-        const dob = document.getElementById("dob").value;
-        const email = document.getElementById("email").value;
-
-        await updateProfile(user, {
-          displayName: fullName,
-        });
-        const userRef = doc(db, "users", user.uid);
-        await setDoc(
-          userRef,
-          {
-            firstName,
-            lastName,
-            email,
-            dob,
-            displayName: fullName,
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            merge: true,
-          }
-        );
-
-        document.getElementById("user-name").textContent = fullName;
-        document.getElementById("user-email").textContent = email;
-
-        showToast("success", "Profile updated successfully!");
-      } catch (error) {
-        console.error("Update error:", error);
-        showToast("error", "Error updating profile: " + error.message);
-      }
-    } else {
-      showToast("error", "Please log in to update your profile");
-      window.location.href = "../auth/login.html";
-    }
-  });
-
-document
-  .getElementById("address-form")
-  .addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const user = auth.currentUser;
-    if (user) {
-      try {
-        const address = {
-          street: document.getElementById("street-address").value,
-          city: document.getElementById("city").value,
-          state: document.getElementById("state").value,
-          postalCode: document.getElementById("postal-code").value,
-          country: document.getElementById("country").value,
-        };
-
-        const userRef = doc(db, "users", user.uid);
-        await setDoc(
-          userRef,
-          {
-            address,
-            updatedAt: new Date().toISOString(),
-          },
-          {
-            merge: true,
-          }
-        );
-
-        showToast("success", "Address updated successfully!");
-      } catch (error) {
-        console.error("Update error:", error);
-        showToast("error", "Error updating address: " + error.message);
-      }
-    }
-  });
 
 async function loadUserData() {
   const user = auth.currentUser;
@@ -169,25 +93,146 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-document
-  .getElementById("password-form")
-  .addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const user = auth.currentUser;
-    const newPassword = document.querySelector(
-      '#v-pills-settings input[type="password"]'
-    ).value;
+// Logout functionality
+async function logout() {
+  console.log("Logout function called");
+  try {
+    // Remove login status first to prevent redirect loops
+    localStorage.removeItem("isLoggedIn");
+    console.log("Removed login status from localStorage");
 
-    if (user) {
-      try {
-        await updatePassword(user, newPassword);
-        showToast("success", "Password updated successfully!");
-        document.getElementById("password-form").reset();
-      } catch (error) {
-        showToast("error", "Error updating password: " + error.message);
+    // Clear cart data
+    localStorage.removeItem("quickmart-cart");
+    console.log("Cleared cart from localStorage");
+
+    // Sign out from Firebase
+    await signOut(auth);
+    console.log("Firebase signOut completed");
+
+    // Redirect to home page
+    console.log("Redirecting to home page");
+    window.location.href = "../index.html";
+  } catch (error) {
+    console.error("Error signing out:", error);
+    showToast("error", "Error signing out: " + error.message);
+  }
+}
+
+// Add event listeners when DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+  // Logout button
+  const logoutBtn = document.getElementById("logout-btn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", logout);
+  }
+
+  // Profile form
+  const profileForm = document.getElementById("profile-form");
+  if (profileForm) {
+    profileForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const user = auth.currentUser;
+      if (user) {
+        try {
+          const firstName = document.getElementById("first-name").value;
+          const lastName = document.getElementById("last-name").value;
+          const fullName = `${firstName} ${lastName}`.trim();
+          const dob = document.getElementById("dob").value;
+          const email = document.getElementById("email").value;
+
+          await updateProfile(user, {
+            displayName: fullName,
+          });
+          const userRef = doc(db, "users", user.uid);
+          await setDoc(
+            userRef,
+            {
+              firstName,
+              lastName,
+              email,
+              dob,
+              displayName: fullName,
+              updatedAt: new Date().toISOString(),
+            },
+            {
+              merge: true,
+            }
+          );
+
+          document.getElementById("user-name").textContent = fullName;
+          document.getElementById("user-email").textContent = email;
+
+          showToast("success", "Profile updated successfully!");
+        } catch (error) {
+          console.error("Update error:", error);
+          showToast("error", "Error updating profile: " + error.message);
+        }
+      } else {
+        showToast("error", "Please log in to update your profile");
+        window.location.href = "../auth/login.html";
       }
-    }
-  });
+    });
+  }
+
+  // Address form
+  const addressForm = document.getElementById("address-form");
+  if (addressForm) {
+    addressForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const user = auth.currentUser;
+      if (user) {
+        try {
+          const address = {
+            street: document.getElementById("street-address").value,
+            city: document.getElementById("city").value,
+            state: document.getElementById("state").value,
+            postalCode: document.getElementById("postal-code").value,
+            country: document.getElementById("country").value,
+          };
+
+          const userRef = doc(db, "users", user.uid);
+          await setDoc(
+            userRef,
+            {
+              address,
+              updatedAt: new Date().toISOString(),
+            },
+            {
+              merge: true,
+            }
+          );
+
+          showToast("success", "Address updated successfully!");
+        } catch (error) {
+          console.error("Update error:", error);
+          showToast("error", "Error updating address: " + error.message);
+        }
+      }
+    });
+  }
+
+  // Password form
+  const passwordForm = document.getElementById("password-form");
+  if (passwordForm) {
+    passwordForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const user = auth.currentUser;
+      const newPassword = document.querySelector(
+        '#v-pills-settings input[type="password"]'
+      ).value;
+
+      if (user) {
+        try {
+          await updatePassword(user, newPassword);
+          showToast("success", "Password updated successfully!");
+          document.getElementById("password-form").reset();
+        } catch (error) {
+          showToast("error", "Error updating password: " + error.message);
+        }
+      }
+    });
+  }
+});
 
 document.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", (e) => {

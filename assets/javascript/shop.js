@@ -1,3 +1,10 @@
+const bootstrapScript = document.createElement("script");
+bootstrapScript.src =
+  "https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js";
+document.head.appendChild(bootstrapScript);
+import { auth } from "./firebase-config.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
 const products = [
   {
     id: 1,
@@ -60,16 +67,44 @@ function renderProducts() {
                 <h5>${product.name}</h5>
                 <p>₹${product.price.toFixed(2)}</p>
                 <div class="quantity-control">
-                    <button onclick="decreaseQuantity(${product.id})">-</button>
+                    <button class="decrease-btn" data-product-id="${
+                      product.id
+                    }">-</button>
                     <input type="text" id="quantity-${product.id}" value="0" 
                            style="width:50px; text-align:center;" readonly>
-                    <button onclick="increaseQuantity(${product.id})">+</button>
+                    <button class="increase-btn" data-product-id="${
+                      product.id
+                    }">+</button>
                 </div>
-                <button onclick="addToCart(${product.id})" 
-                        class="btn btn-primary mt-2">Add to Cart</button>
+                <button class="add-to-cart-btn btn btn-primary mt-2" 
+                        data-product-id="${product.id}">Add to Cart</button>
             </div>
         `;
     container.appendChild(productDiv);
+  });
+  addEventListeners();
+}
+
+function addEventListeners() {
+  document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const productId = parseInt(e.target.dataset.productId);
+      addToCart(productId);
+    });
+  });
+  // increase qty buttons
+  document.querySelectorAll(".increase-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const productId = parseInt(e.target.dataset.productId);
+      increaseQuantity(productId);
+    });
+  });
+  // decr qty buttons
+  document.querySelectorAll(".decrease-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const productId = parseInt(e.target.dataset.productId);
+      decreaseQuantity(productId);
+    });
   });
 }
 
@@ -150,7 +185,37 @@ document.getElementById("checkout-btn").addEventListener("click", () => {
   }
 });
 
+async function logout() {
+  console.log("Logout function called");
+  try {
+    console.log("Removing login status...");
+    localStorage.removeItem("isLoggedIn");
+
+    console.log("Clearing cart...");
+    localStorage.removeItem("quickmart-cart");
+
+    console.log("Signing out from Firebase...");
+    await signOut(auth);
+
+    console.log("Redirecting to home page...");
+    window.location.href = "../index.html";
+  } catch (error) {
+    console.error("Error signing out:", error);
+    alert("Error signing out: " + error.message);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM Content Loaded");
   renderProducts();
   updateCartSummary();
+
+  const logoutBtn = document.getElementById("logout-btn");
+  console.log("Logout button found:", logoutBtn);
+  if (logoutBtn) {
+    console.log("Adding logout event listener");
+    logoutBtn.addEventListener("click", logout);
+  } else {
+    console.error("Logout button not found!");
+  }
 });
